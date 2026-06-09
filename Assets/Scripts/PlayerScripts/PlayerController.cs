@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovement()
     {
+        if (inputController.MoveData==null) return;
+
         rb.linearVelocityY = (inputController.MoveData.y * speed) * Time.deltaTime;
         rb.linearVelocityX = (inputController.MoveData.x * speed) * Time.deltaTime;
     }
