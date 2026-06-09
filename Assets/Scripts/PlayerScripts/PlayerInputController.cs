@@ -8,10 +8,14 @@ public class PlayerInputController : MonoBehaviour
     [SerializeField] private Vector2 moveData;
     [SerializeField] private bool isInteracting;
     [SerializeField] private bool isChanging;
+    [SerializeField] private float interactingStartTime;
 
     private PlayerInput playerActions;
 
     public Vector2 MoveData => moveData;
+    
+    public bool IsInteracting => isInteracting;
+    public float InteractingStartTime => interactingStartTime;
 
     private void Awake()
     {
@@ -53,6 +57,7 @@ public class PlayerInputController : MonoBehaviour
     private void OnInteractStart(InputAction.CallbackContext ctx)
     {
         isInteracting = true;
+        interactingStartTime = Time.time;
     }
     private void OnInteractEnd(InputAction.CallbackContext ctx)
     {
