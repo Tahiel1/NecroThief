@@ -7,7 +7,7 @@ public class CrossCollider : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        objectOnCross=collision.gameObject.transform.parent.gameObject; ;
+        objectOnCross=collision.gameObject;
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
