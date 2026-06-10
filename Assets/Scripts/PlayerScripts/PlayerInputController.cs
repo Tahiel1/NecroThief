@@ -62,6 +62,7 @@ public class PlayerInputController : MonoBehaviour
     private void OnInteractEnd(InputAction.CallbackContext ctx)
     {
         isInteracting = false;
+        interactingStartTime= Time.time;
     }
 
     private void OnChange(InputAction.CallbackContext ctx)

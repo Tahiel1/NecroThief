@@ -22,10 +22,10 @@ public class Pickpoquet : CrossCollider
 
         if(!playerPressIntOnNpc && !isStealing) return;
 
-        if (currentIntTime<maxIntTime && playerPressIntOnNpc)
+        if (playerPressIntOnNpc && currentIntTime < maxIntTime)
         {
             currentIntTime = Time.time - inputController.InteractingStartTime;
-            isStealing=true;
+            if (currentIntTime < maxIntTime) isStealing=true;
             return;
         }
         else
@@ -37,6 +37,7 @@ public class Pickpoquet : CrossCollider
             else if(isStealing)
             {
                 Debug.Log("No robaste");
+                
             }
         }
         currentIntTime = 0;
