@@ -180,7 +180,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""deabbe95-1092-47f7-b28d-84f9138b338c"",
                     ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold(duration=0.4)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Interact"",

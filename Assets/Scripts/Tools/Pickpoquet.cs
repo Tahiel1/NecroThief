@@ -8,6 +8,8 @@ public class Pickpoquet : CrossCollider
 
     [SerializeField] private float currentIntTime = 0f;
     [SerializeField] private float maxIntTime = 3f;
+    [SerializeField] private float jusTimeMin = 1.9f;
+    [SerializeField] private float jusTimeMax = 2.3f;
     // Update is called once per frame
     void Update()
     {
@@ -16,27 +18,28 @@ public class Pickpoquet : CrossCollider
 
     private void HandleInteraction()
     {
-        if (!objectOnCross && !isStealing) return;
-        
-        bool playerPlayerPressInt = inputController.IsInteracting;
+        bool playerPressIntOnNpc = inputController.IsInteracting && objectOnCross!=null;
 
-        if (playerPlayerPressInt && currentIntTime<maxIntTime)
+        if(!playerPressIntOnNpc && !isStealing) return;
+
+        if (currentIntTime<maxIntTime && playerPressIntOnNpc)
         {
             currentIntTime = Time.time - inputController.InteractingStartTime;
             isStealing=true;
+            return;
         }
         else
         {
-            if (currentIntTime < maxIntTime)
+            if (currentIntTime>=jusTimeMin && currentIntTime<=jusTimeMax)
             {
-                Debug.Log("Soltaste a tiempo");
+                Debug.Log("Robaste");
             }
-            currentIntTime = 0;
-            Debug.Log("Dejaste de interactuar");
+            else if(isStealing)
+            {
+                Debug.Log("No robaste");
+            }
         }
-        if (!objectOnCross)
-        {
-            isStealing = false;
-        }
+        currentIntTime = 0;
+        isStealing = false;
     }
 }
