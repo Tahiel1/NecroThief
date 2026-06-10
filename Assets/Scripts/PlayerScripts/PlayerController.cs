@@ -8,8 +8,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
 
     [SerializeField] private float speed;
-    [SerializeField] private float currentIntTime=0f;
-    [SerializeField] private float maxIntTime=3f;
 
 
     private void Start()
@@ -22,34 +20,14 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         HandleMovement();
-        HandleInteraction();
     }
 
     private void HandleMovement()
     {
-        if (inputController.MoveData==null) return;
+        if (inputController.MoveData == null) return;
 
         rb.linearVelocityY = (inputController.MoveData.y * speed) * Time.deltaTime;
         rb.linearVelocityX = (inputController.MoveData.x * speed) * Time.deltaTime;
     }
 
-    private void HandleInteraction()
-    {
-        if(!inputController.IsInteracting && currentIntTime <= 0) return;
-
-        if (inputController.IsInteracting && currentIntTime<maxIntTime)
-        {
-            currentIntTime = Time.time - inputController.InteractingStartTime;
-        }
-        else
-        {
-            if (currentIntTime<maxIntTime)
-            {
-                Debug.Log("Soltaste a tiempo");
-            }
-            currentIntTime = 0;
-            Debug.Log("Dejaste de interactuar");
-        }
-
-    }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EquipedObject : MonoBehaviour
+public class CrossAirPos : MonoBehaviour
 {
     [SerializeField] private PlayerInputController inputController;
     [SerializeField] private GameObject crossAir;
@@ -14,6 +14,7 @@ public class EquipedObject : MonoBehaviour
 
     private void HandleCrossPosition()
     {
+        //Hago que la posisión de la mira cambie al rededor del jugador dependiendo de hacia donde se haya movio por última vez (sin contar diagonales)
         Vector3 temPosition = crossAir.transform.position;
         Vector2 inputUser = inputController.MoveData;
 
