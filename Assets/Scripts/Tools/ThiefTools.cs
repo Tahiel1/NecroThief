@@ -1,16 +1,9 @@
 using UnityEngine;
 
-public class ThiefTools : MonoBehaviour
+public class ThiefTools : Pickpoquet, IisSus
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void addSus(int amount)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Debug.Log("Sumando a la sospecha " + amount + " puntos.");
     }
 }

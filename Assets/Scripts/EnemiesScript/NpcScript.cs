@@ -21,6 +21,7 @@ public abstract class NpcScript : MonoBehaviour
     protected Vector3 direction;
     protected bool isMoving = false;
 
+
     void Start()
     {
         StartCoroutine(RoutineNpcLifecycle());
@@ -42,7 +43,7 @@ public abstract class NpcScript : MonoBehaviour
     // Ciclo de vida del NPC: Elige dirección -> Se mueve -> Se detiene
     protected IEnumerator RoutineNpcLifecycle()
     {
-        while (true) // Bucle infinito independiente para cada NPC
+        while (true) 
         {
             ChangeDirection();
             isMoving = true;

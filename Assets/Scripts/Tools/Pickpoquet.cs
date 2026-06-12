@@ -3,20 +3,21 @@ using UnityEngine;
 
 public class Pickpoquet : CrossCollider
 {
-    [SerializeField] private PlayerInputController inputController;
-    [SerializeField] private bool isStealing = false;
+    [SerializeField] protected PlayerInputController inputController;
+    [SerializeField] protected bool isStealing = false;
+    public bool IsStealing => isStealing;
 
-    [SerializeField] private float currentIntTime = 0f;
-    [SerializeField] private float maxIntTime = 3f;
-    [SerializeField] private float jusTimeMin = 1.9f;
-    [SerializeField] private float jusTimeMax = 2.3f;
+    [SerializeField] protected float currentIntTime = 0f;
+    [SerializeField] protected float maxIntTime = 3f;
+    [SerializeField] protected float jusTimeMin = 1.9f;
+    [SerializeField] protected float jusTimeMax = 2.3f;
     // Update is called once per frame
     void Update()
     {
         HandleInteraction();
     }
 
-    private void HandleInteraction()
+    protected void HandleInteraction()
     {
         bool playerPressIntOnNpc = inputController.IsInteracting && objectOnCross!=null;
 

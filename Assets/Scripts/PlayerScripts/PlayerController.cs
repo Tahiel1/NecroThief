@@ -7,8 +7,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerInputController inputController;
     [SerializeField] private Rigidbody2D rb;
 
+    [Header ("movement")]
     [SerializeField] private float speed;
-
+    [SerializeField] private bool isDoingSomething = false;
 
     private void Start()
     {

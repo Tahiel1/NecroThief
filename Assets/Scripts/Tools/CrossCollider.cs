@@ -5,11 +5,11 @@ public class CrossCollider : MonoBehaviour
 {
     [SerializeField] protected GameObject objectOnCross;
 
-    private void OnTriggerStay2D(Collider2D collision)
+    protected void OnTriggerStay2D(Collider2D collision)
     {
         objectOnCross=collision.gameObject;
     }
-    private void OnTriggerExit2D(Collider2D collision)
+    protected void OnTriggerExit2D(Collider2D collision)
     {
         objectOnCross=null;
     }
