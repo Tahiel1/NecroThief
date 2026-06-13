@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +12,12 @@ public class PlayerInputController : MonoBehaviour
     [SerializeField] private bool isChanging;
     [SerializeField] private float interactingStartTime;
 
+    [Header("Tools")]
+    [SerializeField] private GameObject pickPocket;
+    [SerializeField] private GameObject tiefTools;
+    [SerializeField] private GameObject slingShot;
+    private Dictionary<int, GameObject> toolList = new Dictionary<int, GameObject>();
+
     private PlayerInput playerActions;
 
     public Vector2 MoveData => moveData;
@@ -20,6 +28,11 @@ public class PlayerInputController : MonoBehaviour
     private void Awake()
     {
         playerActions = new PlayerInput();
+        
+        toolList.Add(0, pickPocket);
+        toolList.Add(1, tiefTools);
+        toolList.Add(2, slingShot);
+
     }
 
     private void OnEnable()
@@ -67,8 +80,41 @@ public class PlayerInputController : MonoBehaviour
 
     private void OnChange(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
-            isChanging = true;
-        else isChanging = false;
+        int numKeyValue;
+
+        int.TryParse(ctx.control.name, out numKeyValue);
+
+        
+        switch (numKeyValue)
+        {
+            case 1:
+                SetActiveTool(numKeyValue);
+                break;
+            case 2:
+                SetActiveTool(numKeyValue);
+                break;
+            case 3:
+                SetActiveTool(numKeyValue);
+                break;
+            default:
+                Debug.Log("No object Selected");
+                break;
+        }
+    }
+
+    private void SetActiveTool(int tool)
+    {
+        foreach (var (num,equipedtool) in toolList)
+        {
+            if ((tool - 1)== num)
+            {
+                equipedtool.SetActive(true);
+            }
+            else
+            {
+                equipedtool.SetActive(false);
+            }
+            
+        }
     }
 }

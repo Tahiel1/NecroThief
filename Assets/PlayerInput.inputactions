@@ -26,12 +26,12 @@
                 },
                 {
                     "name": "ChangeInteract",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "0038cd1b-7073-4695-b5aa-114e72559f07",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -103,8 +103,30 @@
                 },
                 {
                     "name": "",
-                    "id": "725289f8-8e45-40a1-bfa1-482af6ce8d03",
-                    "path": "<Keyboard>/q",
+                    "id": "d39d606e-0940-4164-90d8-67d9a168bced",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeInteract",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1054190a-e5a0-46cc-a333-ddb54feba359",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeInteract",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ad35ed69-282b-42c8-8dde-25fb7770f8ed",
+                    "path": "<Keyboard>/3",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

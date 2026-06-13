@@ -1,16 +1,27 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class Slingshot : MonoBehaviour
+public class Slingshot : CrossAirPos, IisSus
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] float timeBetweenShots = 1.5f;
+    [SerializeField] float timeLastShoot = 0f;
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField] private GameObject bullet;
+
+
+    private void Update()
     {
-        
+        HandleShot();
+    }
+    private void HandleShot()
+    {
+        if (inputController.IsInteracting)
+        {
+            Instantiate(bullet);
+        }
+    }
+    public void addSus(int amount)
+    {
+        GameController.Instance.UpdateSuspicion(amount);
     }
 }
