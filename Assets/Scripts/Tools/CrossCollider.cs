@@ -7,10 +7,13 @@ public class CrossCollider : MonoBehaviour
 
     protected void OnTriggerStay2D(Collider2D collision)
     {
-        objectOnCross=collision.gameObject;
+        IisStealable isStealable = collision.GetComponent<IisStealable>();
+        if(isStealable!=null)
+            objectOnCross=collision.gameObject;
     }
     protected void OnTriggerExit2D(Collider2D collision)
     {
-        objectOnCross=null;
+        if(collision.gameObject==objectOnCross)
+            objectOnCross=null;
     }
 }

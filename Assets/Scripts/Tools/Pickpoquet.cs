@@ -33,14 +33,19 @@ public class Pickpoquet : CrossCollider
         {
             if (currentIntTime>=jusTimeMin && currentIntTime<=jusTimeMax)
             {
-                Debug.Log("Robaste");
-                GameController.Instance.AddScore(50);
+                if (objectOnCross != null)
+                {
+                    Debug.Log("Robaste");
+                    objectOnCross.GetComponent<IisStealable>().StealMoney();
+                }
             }
             else if(isStealing)
             {
-                Debug.Log("No robaste");
-                GameController.Instance.AddScore(50);
-
+                if (objectOnCross != null)
+                {
+                    Debug.Log("No robaste");
+                    objectOnCross.GetComponent<IisStealable>().FailSteal();
+                }
             }
         }
         currentIntTime = 0;

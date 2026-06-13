@@ -139,7 +139,7 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.5773587}
+    - - {x: 0, y: 0.52}
       - {x: -0.5, y: -0.28866667}
       - {x: 0.5, y: -0.28866667}
   m_UseDelaunayMesh: 1
@@ -344,3 +344,5 @@ MonoBehaviour:
   moveTime: 3
   coneOfVisionPivot: {fileID: 6125394454110390468}
   coneOfVision: {fileID: 4197456130020970616}
+  money: 25
+  failStealPen: 15
