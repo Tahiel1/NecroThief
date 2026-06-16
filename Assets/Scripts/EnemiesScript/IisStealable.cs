@@ -5,4 +5,5 @@ public interface IisStealable
 {
     public void StealMoney();
     public void FailSteal();
+    public bool IsStealable();
 }

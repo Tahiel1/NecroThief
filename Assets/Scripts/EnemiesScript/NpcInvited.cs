@@ -14,4 +14,10 @@ public class NpcInvited : NpcScript, IisStealable
     {
         GameController.Instance.UpdateSuspicion(failStealPen);
     }
+
+    public bool IsStealable()
+    {
+        bool isStealabel = (money != 0);
+        return isStealabel;
+    }
 }

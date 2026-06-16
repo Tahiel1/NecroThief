@@ -15,6 +15,8 @@ public class Pickpoquet : CrossCollider
 
     [SerializeField] protected GameObject timerInt;
     [SerializeField] protected Scrollbar scrollbar;
+
+    [SerializeField] protected GameObject isSusCollider;
     // Update is called once per frame
     void Update()
     {
@@ -28,9 +30,12 @@ public class Pickpoquet : CrossCollider
         if(!playerPressIntOnNpc && !isStealing)
         {
             timerInt.SetActive(false);
+            isSusCollider.SetActive(false);
             return;
         }
+        //Activo la barra de robo
         timerInt.SetActive(true);
+        isSusCollider.SetActive(true);
         if (playerPressIntOnNpc && currentIntTime < maxIntTime)
         {
             currentIntTime = Time.time - inputController.InteractingStartTime;
@@ -46,6 +51,7 @@ public class Pickpoquet : CrossCollider
                 {
                     Debug.Log("Robaste");
                     objectOnCross.GetComponent<IisStealable>().StealMoney();
+                    objectOnCross = null;
                 }
             }
             else if(isStealing)
