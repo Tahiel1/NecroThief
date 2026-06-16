@@ -16,6 +16,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "5714aa99-74e8-40cc-865f-5fc3b6121f29",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Interact",
                     "type": "Button",
                     "id": "ab096715-30e3-4a42-8585-15f3c7627913",
@@ -92,6 +101,17 @@
                 },
                 {
                     "name": "",
+                    "id": "e88ae362-eb9e-4aba-9084-d53ee868559e",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "deabbe95-1092-47f7-b28d-84f9138b338c",
                     "path": "<Keyboard>/e",
                     "interactions": "Hold(duration=0.4)",
@@ -131,6 +151,34 @@
                     "processors": "",
                     "groups": "",
                     "action": "ChangeInteract",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "a18f9337-f6a0-4e3d-b5e1-8c3faf80d018",
+            "actions": [
+                {
+                    "name": "Unpause",
+                    "type": "Button",
+                    "id": "17cc3401-e80e-49ca-9267-928ba563a3e2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "7ee2c02f-7fc8-4632-99f7-64926e4530a1",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Unpause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
