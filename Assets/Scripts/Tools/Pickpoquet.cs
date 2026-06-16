@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Pickpoquet : CrossCollider
 {
@@ -11,6 +12,9 @@ public class Pickpoquet : CrossCollider
     [SerializeField] protected float maxIntTime = 3f;
     [SerializeField] protected float jusTimeMin = 1.9f;
     [SerializeField] protected float jusTimeMax = 2.3f;
+
+    [SerializeField] protected GameObject timerInt;
+    [SerializeField] protected Scrollbar scrollbar;
     // Update is called once per frame
     void Update()
     {
@@ -21,12 +25,17 @@ public class Pickpoquet : CrossCollider
     {
         bool playerPressIntOnNpc = inputController.IsInteracting && objectOnCross!=null;
 
-        if(!playerPressIntOnNpc && !isStealing) return;
-
+        if(!playerPressIntOnNpc && !isStealing)
+        {
+            timerInt.SetActive(false);
+            return;
+        }
+        timerInt.SetActive(true);
         if (playerPressIntOnNpc && currentIntTime < maxIntTime)
         {
             currentIntTime = Time.time - inputController.InteractingStartTime;
             if (currentIntTime < maxIntTime) isStealing=true;
+            scrollbar.value = Mathf.Lerp(0f, 1f, currentIntTime / maxIntTime);
             return;
         }
         else
