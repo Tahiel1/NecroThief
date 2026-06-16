@@ -10,6 +10,8 @@ public class GameController : MonoBehaviour
     [Header("Game Data")]
     private int score=0;
     private float suspicion;
+    private int maxLevel = 1;
+    public int MaxLevel => maxLevel;
     
 
     private void Awake()
@@ -51,5 +53,13 @@ public class GameController : MonoBehaviour
     {
         score = 0;
         hudManager.SetScoreStarLevel(level,score);
+    }
+
+    public void addMaxLevel(int level)
+    {
+        if (maxLevel == level)
+        {
+            maxLevel += 1;
+        }
     }
 }
