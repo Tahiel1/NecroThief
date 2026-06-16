@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Slingshot : CrossAirPos, IisSus
 {
-    [SerializeField] float timeBetweenShots = 1.5f;
+    [SerializeField] float timeBetweenShots = 2f;
     [SerializeField] float timeLastShoot = 0f;
 
     [SerializeField] private GameObject bullet;
@@ -15,9 +15,14 @@ public class Slingshot : CrossAirPos, IisSus
     }
     private void HandleShot()
     {
-        if (inputController.IsInteracting)
+        if (inputController.IsInteracting && timeLastShoot>=timeBetweenShots)
         {
-            Instantiate(bullet);
+            Instantiate(bullet, transform.position, transform.rotation);
+            timeLastShoot = 0;
+        }
+        else
+        {
+            timeLastShoot += Time.deltaTime;
         }
     }
     public void addSus(int amount)

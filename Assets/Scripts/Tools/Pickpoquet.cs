@@ -51,7 +51,6 @@ public class Pickpoquet : CrossCollider
                 {
                     Debug.Log("Robaste");
                     objectOnCross.GetComponent<IisStealable>().StealMoney();
-                    objectOnCross = null;
                 }
             }
             else if(isStealing)
@@ -65,5 +64,15 @@ public class Pickpoquet : CrossCollider
         }
         currentIntTime = 0;
         isStealing = false;
+    }
+    protected void OnTriggerExit2D(Collider2D collision)
+    {
+        if (isStealing)
+        {
+            Debug.Log("No robaste");
+            objectOnCross.GetComponent<IisStealable>().FailSteal();
+        }
+        if (collision.gameObject == objectOnCross)
+            objectOnCross = null;
     }
 }

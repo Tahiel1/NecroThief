@@ -666,9 +666,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Slingshot
   inputController: {fileID: 3200810825657785506}
   crossAir: {fileID: 3880228378045980659}
-  timeBetweenShots: 1.5
+  timeBetweenShots: 2
   timeLastShoot: 0
-  bullet: {fileID: 0}
+  bullet: {fileID: 1886569815169799546, guid: d8ce37e91bd6b6f41a8b88dae6a7c3b2, type: 3}
 --- !u!1 &4570012710130290870
 GameObject:
   m_ObjectHideFlags: 0
