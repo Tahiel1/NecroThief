@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private PlayerInputController inputController;
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private SpriteRenderer playerSprite;
 
     [Header ("movement")]
     [SerializeField] private float speed;
@@ -29,6 +30,15 @@ public class PlayerController : MonoBehaviour
 
         rb.linearVelocityY = (inputController.MoveData.y * speed) * Time.deltaTime;
         rb.linearVelocityX = (inputController.MoveData.x * speed) * Time.deltaTime;
+
+        if (inputController.MoveData.x > 0)
+        {
+            playerSprite.flipX = true;
+        }
+        else if (inputController.MoveData.x < 0)
+        {
+            playerSprite.flipX = false;
+        }
     }
 
 }

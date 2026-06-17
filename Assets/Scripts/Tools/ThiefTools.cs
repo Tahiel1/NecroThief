@@ -6,4 +6,9 @@ public class ThiefTools : Pickpoquet, IisSus
     {
         GameController.Instance.UpdateSuspicion(amount);
     }
+
+    protected override void OnTriggerStay2D(Collider2D collision)
+    {
+        base.OnTriggerStay2D(collision);
+    }
 }

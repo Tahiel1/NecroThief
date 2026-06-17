@@ -8,6 +8,7 @@ public abstract class NpcScript : MonoBehaviour
     [SerializeField] protected float speed = 5f;
     [SerializeField] protected float stopTime = 5f;
     [SerializeField] protected float moveTime = 4f;
+    [SerializeField] protected SpriteRenderer bodySprite;
 
     // NUEVO: Variables para delimitar las coordenadas máximas y mínimas del mapa
     [Header("Map Bounds")]
@@ -76,13 +77,10 @@ public abstract class NpcScript : MonoBehaviour
         }
     }
 
-    // NUEVO: Método que se ejecuta automáticamente en TODOS los NPCs cuando suena el evento
     private void InvestigateNoise(Vector3 noisePosition)
     {
-        // Si ya está investigando, ignoramos el nuevo ruido (o puedes reiniciar el tiempo si prefieres)
         if (isDistracted) return;
 
-        // 1. Detenemos la rutina de patrullaje actual inmediatamente
         if (lifecycleCoroutine != null)
         {
             StopCoroutine(lifecycleCoroutine);
@@ -90,11 +88,10 @@ public abstract class NpcScript : MonoBehaviour
 
         isMoving = false;
 
-        // 2. Iniciamos la reacción de alerta
+        //Iniciamos la reacción de alerta
         lifecycleCoroutine = StartCoroutine(RoutineReactionToNoise(noisePosition));
     }
 
-    // NUEVO: Corrutina que maneja los 4 segundos de distracción
     private IEnumerator RoutineReactionToNoise(Vector3 targetPosition)
     {
         isDistracted = true;
@@ -102,7 +99,7 @@ public abstract class NpcScript : MonoBehaviour
         // Calculamos la dirección relativa hacia el ruido
         Vector3 directionToNoise = targetPosition - transform.position;
 
-        // Cambiamos el cono de visión hacia el eje cardinal donde ocurrió el ruido
+        // Cambiamos el cono de visión hacia donde ocurrió el ruido
         if (Mathf.Abs(directionToNoise.x) > Mathf.Abs(directionToNoise.y))
         {
             // El ruido fue más horizontal que vertical
@@ -172,6 +169,7 @@ public abstract class NpcScript : MonoBehaviour
             case 2:
                 coneOfVisionPivot.transform.rotation = Quaternion.Euler(0, 0, leftView);
                 direction = Vector3.left;
+                bodySprite.flipX = false;
                 break;
             case 3:
                 coneOfVisionPivot.transform.rotation = Quaternion.Euler(0, 0, upView);
@@ -180,6 +178,7 @@ public abstract class NpcScript : MonoBehaviour
             case 4:
                 coneOfVisionPivot.transform.rotation = Quaternion.Euler(0, 0, rightView);
                 direction = Vector3.right;
+                bodySprite.flipX = true;
                 break;
         }
     }
