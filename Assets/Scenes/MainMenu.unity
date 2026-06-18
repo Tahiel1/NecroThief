@@ -3514,6 +3514,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameController
   hudManager: {fileID: 0}
+  endLevel: {fileID: 0}
+  victoryPanel: {fileID: 0}
+  losePanel: {fileID: 0}
+  suspicion: 0
+  maxLevel: 1
+  allLevels: 3
 --- !u!4 &1633227100
 Transform:
   m_ObjectHideFlags: 0

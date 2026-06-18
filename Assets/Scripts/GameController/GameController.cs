@@ -13,8 +13,9 @@ public class GameController : MonoBehaviour
 
     [Header("Game Data")]
     private int score=0;
-    private float suspicion;
+    [SerializeField] private float suspicion;
     private int maxLevel = 1;
+    [SerializeField] private int allLevels = 3;
     public int MaxLevel => maxLevel;
     
 
@@ -61,7 +62,7 @@ public class GameController : MonoBehaviour
 
     public void addMaxLevel(int level)
     {
-        if (maxLevel == level)
+        if (maxLevel == level && maxLevel < allLevels)
         {
             maxLevel += 1;
         }
