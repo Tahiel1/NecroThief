@@ -78,6 +78,7 @@ public class Pickpoquet : CrossCollider
     {
         Debug.Log("Robaste");
         objectOnCross.GetComponent<IisStealable>().StealMoney();
+        objectOnCross = null;
     }
     public virtual void DidntSteal()
     {
