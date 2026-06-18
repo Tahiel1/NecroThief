@@ -83,8 +83,9 @@ public class GameController : MonoBehaviour
     {
         Debug.Log("Asignando componentes");
         hudManager = susBar;
-        endLevel= otherEndLevel;
-        losePanel= otherLosePanel;
-        victoryPanel= otherVictoryPanel;
+        endLevel = otherEndLevel;
+        losePanel = otherLosePanel;
+        victoryPanel = otherVictoryPanel;
+        suspicion = 0f;
     }
 }
