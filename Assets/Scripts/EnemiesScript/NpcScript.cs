@@ -9,6 +9,8 @@ public abstract class NpcScript : MonoBehaviour
     [SerializeField] protected float stopTime = 5f;
     [SerializeField] protected float moveTime = 4f;
     [SerializeField] protected SpriteRenderer bodySprite;
+    private int attemptDirections=0;
+    private int maxAttempt = 10;
 
     //Variables para delimitar las coordenadas máximas y mínimas del mapa
     [Header("Map Bounds")]
@@ -65,6 +67,7 @@ public abstract class NpcScript : MonoBehaviour
     {
         while (true)
         {
+            attemptDirections = 0;
             ChangeDirection();
             isMoving = true;
             yield return new WaitForSeconds(moveTime);
@@ -119,19 +122,48 @@ public abstract class NpcScript : MonoBehaviour
 
     protected virtual void ChangeDirection()
     {
-        int randomDirection = Random.Range(1, 5);
-        ApplyDirectionSettings(randomDirection);
+        bool isOutOfBounds;
 
-        Vector3 predictedTarget = transform.position + (direction * speed * moveTime);
-
-        if (predictedTarget.x <= minX || predictedTarget.x >= maxX ||
-            predictedTarget.y <= minY || predictedTarget.y >= maxY)
+        do
         {
-            Debug.Log("Se va a salir el NPC");
-            ChangeDirection();
+            int randomDirection = Random.Range(1, 5);
+            ApplyDirectionSettings(randomDirection);
+
+            Vector3 predictedTarget = transform.position + (direction * speed * moveTime);
+
+            isOutOfBounds = predictedTarget.x < minX || predictedTarget.x > maxX ||
+                            predictedTarget.y < minY || predictedTarget.y > maxY;
+
+            if (isOutOfBounds)
+            {
+                Debug.Log("Se va a salir el NPC, intentando otra dirección...");
+                attemptDirections++;
+            }
+
+        }
+        while (isOutOfBounds && attemptDirections < maxAttempt);
+
+        if (isOutOfBounds)
+        {
+            Debug.LogWarning("El NPC se quedó sin intentos válidos. Forzando dirección al centro.");
+            ForceDirectionToCenter();
         }
     }
 
+    private void ForceDirectionToCenter()
+    {
+        Vector3 center = new Vector3((minX + maxX) / 2f, (minY + maxY) / 2f, 0f);
+        Vector3 directionToCenter = center - transform.position;
+
+        if (Mathf.Abs(directionToCenter.x) > Mathf.Abs(directionToCenter.y))
+        {
+            ApplyDirectionSettings(directionToCenter.x > 0 ? 4 : 2); // Derecha o Izquierda
+        }
+        else
+        {
+            ApplyDirectionSettings(directionToCenter.y > 0 ? 3 : 1); // Arriba o Abajo
+        }
+    }
     /*private void TryRandomValidDirection()
     {
         int[] directions = { 1, 2, 3, 4 };
