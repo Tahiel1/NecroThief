@@ -34,7 +34,7 @@ public class SusBarAndScore : MonoBehaviour
         }
         if (susSlider.value >= maxSus)
         {
-            Debug.Log("Game over");
+            GameController.Instance.LoseLevel();
         }
     }
 
@@ -42,6 +42,7 @@ public class SusBarAndScore : MonoBehaviour
     public void UpdateScoreUI(int currentScore)
     {
         scoreText.text = "$"+currentScore.ToString() +" / $"+ winScore.ToString();
+        if(currentScore>=winScore) GameController.Instance.GetMaxMoney();
     }
 
     public void SetScoreStarLevel(int level, int score)
@@ -55,13 +56,7 @@ public class SusBarAndScore : MonoBehaviour
                 winScore = 125;
                 break;
             case 3:
-                winScore = 150;
-                break;
-            case 4:
-                winScore = 175;
-                break;
-            case 5:
-                winScore = 200;
+                winScore = 250;
                 break;
         }
         UpdateScoreUI(score);

@@ -63,7 +63,7 @@ public class Pickpoquet : CrossCollider
         currentIntTime = 0;
         isStealing = false;
     }
-    protected void OnTriggerExit2D(Collider2D collision)
+    protected virtual void OnTriggerExit2D(Collider2D collision)
     {
         if (isStealing)
         {

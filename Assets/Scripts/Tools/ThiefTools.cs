@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ThiefTools : Pickpoquet, IisSus
@@ -14,6 +15,16 @@ public class ThiefTools : Pickpoquet, IisSus
         {
             objectOnCross = collision.gameObject;
         }
+    }
+    protected override void OnTriggerExit2D(Collider2D collision)
+    {
+        if (isStealing)
+        {
+            Debug.Log("No robaste");
+            objectOnCross.GetComponent<ICanThiefTools>().FailSteal();
+        }
+        if (collision.gameObject == objectOnCross)
+            objectOnCross = null;
     }
 
     protected override void Steal()

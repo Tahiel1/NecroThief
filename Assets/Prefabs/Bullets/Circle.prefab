@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0283e429425a96647beece8e0cf41240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SlingshotAmmo
-  speed: 10
+  speed: 15
 --- !u!50 &5949354883359230210
 Rigidbody2D:
   serializedVersion: 5

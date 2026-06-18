@@ -45,3 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameController
   hudManager: {fileID: 0}
+  endLevel: {fileID: 0}
+  victoryPanel: {fileID: 0}
+  losePanel: {fileID: 0}

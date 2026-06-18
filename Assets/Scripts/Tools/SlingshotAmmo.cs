@@ -4,6 +4,10 @@ public class SlingshotAmmo : MonoBehaviour
 {
 
     [SerializeField] private float speed = 3f;
+    private void Awake()
+    {
+        Destroy(gameObject, 2f);
+    }
     // Update is called once per frame
     void Update()
     {
@@ -16,7 +20,8 @@ public class SlingshotAmmo : MonoBehaviour
         if (canDestroy != null)
         {
             collision.GetComponent<ICanDestroy>().DestroyObject();
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+        
     }
 }

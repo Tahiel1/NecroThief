@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -6,6 +7,9 @@ public class GameController : MonoBehaviour
 
     [Header("Components")]
     [SerializeField] private SusBarAndScore hudManager;
+    [SerializeField] private GameObject endLevel;
+    [SerializeField] private GameObject victoryPanel;
+    [SerializeField] private GameObject losePanel;
 
     [Header("Game Data")]
     private int score=0;
@@ -61,5 +65,26 @@ public class GameController : MonoBehaviour
         {
             maxLevel += 1;
         }
+    }
+    public void GetMaxMoney()
+    {
+        endLevel.SetActive(true);
+    }
+    public void WinLevel()
+    {
+        victoryPanel.SetActive(true);
+    }
+
+    public void LoseLevel()
+    {
+        losePanel.SetActive(true);
+    }
+    public void GetComponentGC(SusBarAndScore susBar, GameObject otherEndLevel, GameObject otherLosePanel, GameObject otherVictoryPanel)
+    {
+        Debug.Log("Asignando componentes");
+        hudManager = susBar;
+        endLevel= otherEndLevel;
+        losePanel= otherLosePanel;
+        victoryPanel= otherVictoryPanel;
     }
 }
