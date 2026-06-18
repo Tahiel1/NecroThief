@@ -10,7 +10,7 @@ public abstract class NpcScript : MonoBehaviour
     [SerializeField] protected float moveTime = 4f;
     [SerializeField] protected SpriteRenderer bodySprite;
 
-    // NUEVO: Variables para delimitar las coordenadas máximas y mínimas del mapa
+    //Variables para delimitar las coordenadas máximas y mínimas del mapa
     [Header("Map Bounds")]
     [SerializeField] protected float minX = -10f;
     [SerializeField] protected float maxX = 10f;
@@ -29,11 +29,9 @@ public abstract class NpcScript : MonoBehaviour
     protected Vector3 direction;
     protected bool isMoving = false;
 
-    // NUEVO: Referencia a la corrutina activa para poder pausarla/reiniciarla
     private Coroutine lifecycleCoroutine;
     private bool isDistracted = false;
 
-    // NUEVO: Nos suscribimos al evento cuando el NPC aparece en el mapa
     private void OnEnable()
     {
         DestructibleObject.OnObjectDestroyed += InvestigateNoise;
@@ -52,7 +50,6 @@ public abstract class NpcScript : MonoBehaviour
 
     void Update()
     {
-        // Solo nos movemos si no estamos distraídos por un ruido
         if (isMoving && !isDistracted)
         {
             HandleMovement();
@@ -111,12 +108,12 @@ public abstract class NpcScript : MonoBehaviour
             ApplyDirectionSettings(directionToNoise.y > 0 ? 3 : 1); // 3 = Up, 1 = Down
         }
 
-        // Nos quedamos mirando fijamente durante exactamente 4 segundos
-        yield return new WaitForSeconds(4f);
+        // Nos quedamos mirando fijamente
+        yield return new WaitForSeconds(stopTime);
 
         isDistracted = false;
 
-        // 3. Retomamos el ciclo de vida normal de caminata aleatoria
+        //Retomamos el ciclo de vida normal
         lifecycleCoroutine = StartCoroutine(RoutineNpcLifecycle());
     }
 
@@ -127,36 +124,30 @@ public abstract class NpcScript : MonoBehaviour
 
         Vector3 predictedTarget = transform.position + (direction * speed * moveTime);
 
-        if (predictedTarget.x < minX || predictedTarget.x > maxX ||
-            predictedTarget.y < minY || predictedTarget.y > maxY)
+        if (predictedTarget.x <= minX || predictedTarget.x >= maxX ||
+            predictedTarget.y <= minY || predictedTarget.y >= maxY)
         {
-            TryRandomValidDirection();
+            Debug.Log("Se va a salir el NPC");
+            ChangeDirection();
         }
     }
 
-    private void TryRandomValidDirection()
+    /*private void TryRandomValidDirection()
     {
         int[] directions = { 1, 2, 3, 4 };
-        for (int i = 0; i < directions.Length; i++)
-        {
-            int rnd = Random.Range(0, directions.Length);
-            int temp = directions[i];
-            directions[i] = directions[rnd];
-            directions[rnd] = temp;
-        }
 
         foreach (int dirKey in directions)
         {
             ApplyDirectionSettings(dirKey);
             Vector3 checkTarget = transform.position + (direction * speed * moveTime);
 
-            if (checkTarget.x >= minX && checkTarget.x <= maxX &&
-                checkTarget.y >= minY && checkTarget.y <= maxY)
+            if (checkTarget.x > minX && checkTarget.x < maxX &&
+                checkTarget.y > minY && checkTarget.y < maxY)
             {
                 return;
             }
         }
-    }
+    }*/
 
     private void ApplyDirectionSettings(int directionKey)
     {

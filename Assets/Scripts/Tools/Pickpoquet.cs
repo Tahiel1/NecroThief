@@ -23,7 +23,7 @@ public class Pickpoquet : CrossCollider
         HandleInteraction();
     }
 
-    protected void HandleInteraction()
+    protected virtual void HandleInteraction()
     {
         bool playerPressIntOnNpc = inputController.IsInteracting && objectOnCross!=null;
 
@@ -49,16 +49,14 @@ public class Pickpoquet : CrossCollider
             {
                 if (objectOnCross != null)
                 {
-                    Debug.Log("Robaste");
-                    objectOnCross.GetComponent<IisStealable>().StealMoney();
+                    Steal();
                 }
             }
             else if(isStealing)
             {
                 if (objectOnCross != null)
                 {
-                    Debug.Log("No robaste");
-                    objectOnCross.GetComponent<IisStealable>().FailSteal();
+                    DidntSteal();
                 }
             }
         }
@@ -74,5 +72,18 @@ public class Pickpoquet : CrossCollider
         }
         if (collision.gameObject == objectOnCross)
             objectOnCross = null;
+    }
+
+    protected virtual void Steal()
+    {
+        Debug.Log("Robaste");
+        objectOnCross.GetComponent<IisStealable>().StealMoney();
+    }
+    public virtual void DidntSteal()
+    {
+        Debug.Log("No robaste");
+        objectOnCross.GetComponent<IisStealable>().FailSteal();
+        objectOnCross=null;
+        isStealing=false;
     }
 }

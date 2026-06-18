@@ -7,6 +7,7 @@ public class Slingshot : CrossAirPos, IisSus
     [SerializeField] float timeLastShoot = 0f;
 
     [SerializeField] private GameObject bullet;
+    [SerializeField] private Transform barrelTransform;
 
 
     private void Update()
@@ -17,7 +18,7 @@ public class Slingshot : CrossAirPos, IisSus
     {
         if (inputController.IsInteracting && timeLastShoot>=timeBetweenShots)
         {
-            Instantiate(bullet, transform.position, transform.rotation);
+            Instantiate(bullet, barrelTransform.position, barrelTransform.rotation);
             timeLastShoot = 0;
         }
         else

@@ -554,7 +554,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 1259797576480414084}
   m_Father: {fileID: 3444513692665711332}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5002763003332444331
@@ -669,6 +670,7 @@ MonoBehaviour:
   timeBetweenShots: 2
   timeLastShoot: 0
   bullet: {fileID: 1886569815169799546, guid: d8ce37e91bd6b6f41a8b88dae6a7c3b2, type: 3}
+  barrelTransform: {fileID: 1259797576480414084}
 --- !u!1 &4570012710130290870
 GameObject:
   m_ObjectHideFlags: 0
@@ -895,6 +897,37 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 2.5
+--- !u!1 &4710493749109671400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1259797576480414084}
+  m_Layer: 0
+  m_Name: Barrel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1259797576480414084
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4710493749109671400}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 6.7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5735057680866894461}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5067809788874413786
 GameObject:
   m_ObjectHideFlags: 0
@@ -1492,3 +1525,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e4f25c7dafc124c81739cdcfe0f2a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IsSteallingCollider
+  tiefToolsScript: {fileID: 5164248717421975622}
+  pickpoquetScript: {fileID: 1765231804699664219}

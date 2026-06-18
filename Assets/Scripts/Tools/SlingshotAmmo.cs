@@ -17,5 +17,6 @@ public class SlingshotAmmo : MonoBehaviour
         {
             collision.GetComponent<ICanDestroy>().DestroyObject();
         }
+        Destroy(gameObject);
     }
 }
