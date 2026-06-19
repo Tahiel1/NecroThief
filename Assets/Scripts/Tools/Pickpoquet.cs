@@ -2,7 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Pickpoquet : CrossCollider
+public class Pickpoquet : Tool
 {
     [SerializeField] protected PlayerInputController inputController;
     [SerializeField] protected bool isStealing = false;
@@ -16,14 +16,11 @@ public class Pickpoquet : CrossCollider
     [SerializeField] protected GameObject timerInt;
     [SerializeField] protected Scrollbar scrollbar;
 
-    [SerializeField] protected GameObject isSusCollider;
-    // Update is called once per frame
-    void Update()
-    {
-        HandleInteraction();
-    }
+    [SerializeField] protected GameObject objectOnCross;
 
-    protected virtual void HandleInteraction()
+    [SerializeField] protected GameObject isSusCollider;
+
+    public override void HandleInteraction()
     {
         bool playerPressIntOnNpc = inputController.IsInteracting && objectOnCross!=null;
 
@@ -72,6 +69,13 @@ public class Pickpoquet : CrossCollider
         }
         if (collision.gameObject == objectOnCross)
             objectOnCross = null;
+    }
+
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    {
+        IisStealable isStealable = collision.GetComponent<IisStealable>();
+        if (isStealable != null && isStealable.IsStealable())
+            objectOnCross = collision.gameObject;
     }
 
     protected virtual void Steal()

@@ -14,6 +14,9 @@ public class PlayerInputController : MonoBehaviour
     [SerializeField] private GameObject pickPocket;
     [SerializeField] private GameObject tiefTools;
     [SerializeField] private GameObject slingShot;
+
+    [SerializeField] private Tool activeTool;
+
     private Dictionary<int, GameObject> toolList = new Dictionary<int, GameObject>();
 
     private PlayerInput playerActions;
@@ -31,6 +34,11 @@ public class PlayerInputController : MonoBehaviour
         toolList.Add(1, tiefTools);
         toolList.Add(2, slingShot);
 
+    }
+
+    private void Update()
+    {
+        if(activeTool) activeTool.HandleInteraction();
     }
 
     private void OnEnable()
@@ -83,21 +91,7 @@ public class PlayerInputController : MonoBehaviour
         int.TryParse(ctx.control.name, out numKeyValue);
 
         
-        switch (numKeyValue)
-        {
-            case 1:
-                SetActiveTool(numKeyValue);
-                break;
-            case 2:
-                SetActiveTool(numKeyValue);
-                break;
-            case 3:
-                SetActiveTool(numKeyValue);
-                break;
-            default:
-                Debug.Log("No object Selected");
-                break;
-        }
+        SetActiveTool(numKeyValue);
     }
 
     private void SetActiveTool(int tool)
@@ -107,6 +101,7 @@ public class PlayerInputController : MonoBehaviour
             if ((tool - 1)== num)
             {
                 equipedtool.SetActive(true);
+                SetActiveInteraction(equipedtool.GetComponent<Tool>());
             }
             else
             {
@@ -114,5 +109,9 @@ public class PlayerInputController : MonoBehaviour
             }
             
         }
+    }
+    public void SetActiveInteraction(Tool newTool)
+    {
+        activeTool = newTool;
     }
 }

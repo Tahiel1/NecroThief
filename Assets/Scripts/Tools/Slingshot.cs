@@ -1,20 +1,17 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Slingshot : CrossAirPos, IisSus
+public class Slingshot : Tool, IisSus
 {
     [SerializeField] float timeBetweenShots = 2f;
     [SerializeField] float timeLastShoot = 0f;
 
+    [SerializeField] protected PlayerInputController inputController;
+
     [SerializeField] private GameObject bullet;
     [SerializeField] private Transform barrelTransform;
 
-
-    private void Update()
-    {
-        HandleShot();
-    }
-    private void HandleShot()
+    public override void HandleInteraction()
     {
         if (inputController.IsInteracting && timeLastShoot>=timeBetweenShots)
         {
