@@ -1,14 +1,12 @@
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class SlingshotAmmo : MonoBehaviour
 {
 
     [SerializeField] private float speed = 3f;
-    private void Awake()
-    {
-        Destroy(gameObject, 2f);
-    }
-    // Update is called once per frame
+    public ObjectPool<SlingshotAmmo> pool;
+
     void Update()
     {
         transform.position += transform.up * speed * Time.deltaTime;
@@ -20,8 +18,18 @@ public class SlingshotAmmo : MonoBehaviour
         if (canDestroy != null)
         {
             collision.GetComponent<ICanDestroy>().DestroyObject();
-            Destroy(gameObject);
+            Deactivate();
         }
         
+    }
+
+    private void OnEnable()
+    {
+        Invoke("Deactivate", 2); 
+    }
+
+    void Deactivate()
+    {
+        pool.Release(this);
     }
 }

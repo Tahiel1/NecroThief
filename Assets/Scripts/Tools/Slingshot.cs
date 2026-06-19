@@ -1,5 +1,5 @@
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class Slingshot : Tool, IisSus
 {
@@ -8,14 +8,45 @@ public class Slingshot : Tool, IisSus
 
     [SerializeField] protected PlayerInputController inputController;
 
-    [SerializeField] private GameObject bullet;
+    [SerializeField] private SlingshotAmmo bullet;
     [SerializeField] private Transform barrelTransform;
+
+    ObjectPool<SlingshotAmmo> ammoPool;
+
+    private void Awake()
+    {
+        ammoPool = new ObjectPool<SlingshotAmmo>(CreateNewBullet,GetBullet,ReturnBullet,DestroyBullet, false, 10, 100);
+    }
+
+    SlingshotAmmo CreateNewBullet()
+    {
+        SlingshotAmmo newBullet = Instantiate(bullet);
+        newBullet.pool = ammoPool;
+        return newBullet;
+    }
+
+    void GetBullet(SlingshotAmmo bullet)
+    {
+        bullet.gameObject.SetActive(true);
+    }
+
+    void ReturnBullet(SlingshotAmmo bullet)
+    {
+        bullet.gameObject.SetActive(false);
+    }
+
+    void DestroyBullet(SlingshotAmmo bullet)
+    {
+        Destroy(bullet.gameObject);
+    }
 
     public override void HandleInteraction()
     {
         if (inputController.IsInteracting && timeLastShoot>=timeBetweenShots)
         {
-            Instantiate(bullet, barrelTransform.position, barrelTransform.rotation);
+            SlingshotAmmo newBullet = ammoPool.Get();
+            newBullet.transform.position = barrelTransform.position;
+            newBullet.transform.rotation = barrelTransform.rotation;
             timeLastShoot = 0;
         }
         else
