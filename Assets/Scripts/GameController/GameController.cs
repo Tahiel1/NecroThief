@@ -3,7 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    public static GameController Instance { get; private set; }
+    private static GameController instance;
+    public static GameController Instance => instance;
 
     [Header("Components")]
     [SerializeField] private SusBarAndScore hudManager;
@@ -27,7 +28,7 @@ public class GameController : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        Instance = this;
+        instance = this;
         DontDestroyOnLoad(gameObject);
     }
 
