@@ -25,6 +25,7 @@ public class SlingshotAmmo : MonoBehaviour
 
     private void OnEnable()
     {
+        CancelInvoke();
         Invoke("Deactivate", 2); 
     }
 

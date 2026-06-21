@@ -1500,6 +1500,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUD
       objectReference: {fileID: 0}
+    - target: {fileID: 6362583863968111759, guid: 730c1160f9ec3a243935f90c53f8d9f2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6433272908199370272, guid: 730c1160f9ec3a243935f90c53f8d9f2, type: 3}
       propertyPath: m_Pivot.x
       value: 0
