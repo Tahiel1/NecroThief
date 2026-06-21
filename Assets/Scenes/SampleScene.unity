@@ -1679,25 +1679,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 291112114409854387, guid: 8a8929b91fb5f9e40818f2d41bd975af, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 291112114409854387, guid: 8a8929b91fb5f9e40818f2d41bd975af, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1336357826786063011, guid: 8a8929b91fb5f9e40818f2d41bd975af, type: 3}
       propertyPath: m_Name
       value: -------------Cameras-------------------
-      objectReference: {fileID: 0}
-    - target: {fileID: 3104023808608050771, guid: 8a8929b91fb5f9e40818f2d41bd975af, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3104023808608050771, guid: 8a8929b91fb5f9e40818f2d41bd975af, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4738034682014801018, guid: 8a8929b91fb5f9e40818f2d41bd975af, type: 3}
       propertyPath: Target.TrackingTarget
@@ -2081,10 +2065,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4026280472097344704, guid: 7ebafa662729c4e45980ddff6aa449f0, type: 3}
-      propertyPath: bullet
-      value: 
-      objectReference: {fileID: 446124494842639874, guid: d8ce37e91bd6b6f41a8b88dae6a7c3b2, type: 3}
     - target: {fileID: 6105320247724030462, guid: 7ebafa662729c4e45980ddff6aa449f0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
