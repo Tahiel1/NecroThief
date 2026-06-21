@@ -29,7 +29,9 @@ public class PlayerInputController : MonoBehaviour
     private void Awake()
     {
         playerActions = new PlayerInput();
-        
+
+        SetActiveInteraction(pickPocket.GetComponent<Tool>());
+
         toolList.Add(0, pickPocket);
         toolList.Add(1, tiefTools);
         toolList.Add(2, slingShot);
