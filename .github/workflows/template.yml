@@ -46,6 +46,6 @@ jobs:
         env:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
           CHANNEL: html
-          ITCH_USER: your-itch-username
-          ITCH_GAME: your-itch-game-url-slug
+          ITCH_USER: tahiel001
+          ITCH_GAME: necrothief
           PACKAGE: build/WebGL/WebGL
