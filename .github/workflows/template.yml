@@ -1,51 +1,81 @@
-name: Build WebGL and Deploy to itch.io
+name: Build All Platforms & Deploy to itch.io
 
 on:
   push:
     branches:
       - main
-   
+      - dev
   pull_request:
     branches:
       - main
+      - dev
+
 jobs:
   build-and-deploy:
-    name: Build & Deploy WebGL
+    name: Build ${{ matrix.platform }}
     runs-on: ubuntu-latest
 
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: WebGL
+            channel: html
+            package: build/WebGL/WebGL
+          - platform: StandaloneLinux64
+            channel: linux
+            package: build/StandaloneLinux64
+          - platform: StandaloneOSX
+            channel: mac
+            package: build/StandaloneOSX
+          - platform: StandaloneWindows64
+            channel: windows
+            package: build/StandaloneWindows64
+
     steps:
-      # 1. Checkout your repository
+      # 1. Descargar el repositorio
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           lfs: true
 
-      # 2. Cache Unity Library folder to speed up future builds
-      - name: Cache Unity Library
+      # 2. Caché de la carpeta Library por plataforma
+      - name: Cache Unity Library (${{ matrix.platform }})
         uses: actions/cache@v4
         with:
           path: Library
-          key: Library-WebGL-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          key: Library-${{ matrix.platform }}-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
           restore-keys: |
-            Library-WebGL-
+            Library-${{ matrix.platform }}-
 
-      # 3. Build the Unity project for WebGL (HTML5)
-      - name: Build Unity WebGL
+      # 3. Compilar cada plataforma
+      - name: Build Unity (${{ matrix.platform }})
         uses: game-ci/unity-builder@v4
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          targetPlatform: WebGL
+          targetPlatform: ${{ matrix.platform }}
           buildsPath: build
 
-      # 4. Upload the build folder to itch.io using Butler
-      - name: Push to itch.io
+      # 4. Definir el nombre del canal según la rama (main vs develop)
+      - name: Set itch.io channel
+        id: set-channel
+        run: |
+          if [ "${{ github.ref_name }}" == "main" ]; then
+            echo "target_channel=${{ matrix.channel }}" >> $GITHUB_OUTPUT
+          else
+            echo "target_channel=${{ matrix.channel }}-dev" >> $GITHUB_OUTPUT
+          fi
+
+      # 5. Subir a itch.io en push a main o develop
+      - name: Push to itch.io (${{ steps.set-channel.outputs.target_channel }})
+        if: github.event_name == 'push'
         uses: yeslayla/butler-publish-itchio-action@master
         env:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-          CHANNEL: html
-          ITCH_USER: tahiel001
-          ITCH_GAME: necrothief
-          PACKAGE: build/WebGL/WebGL
+          CHANNEL: ${{ steps.set-channel.outputs.target_channel }}
+          ITCH_USER: your-itch-username
+          ITCH_GAME: your-itch-game-url-slug
+          PACKAGE: ${{ matrix.package }}
